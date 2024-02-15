@@ -1,5 +1,3 @@
-"use client"
-
 import React from 'react'
 import { usertype } from '../types'
 import Link from 'next/link'
