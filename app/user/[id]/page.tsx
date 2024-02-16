@@ -9,13 +9,20 @@ type Props = {
 }
 
 export async function generateMetadata({params} : Props): Promise<Metadata>{
-    const datafetch = await fetch('https://jsonplaceholder.typicode.com/users')
+    if(Number(params.id)<10){
+      const datafetch = await fetch('https://jsonplaceholder.typicode.com/users')
     const data: usertype[] = await datafetch.json()
     
     const result = data.filter(item => item.id == Number(params.id))
 
     return {
-      title: `${result[0].username}`
+      title: `${result[0]?.username}`
+    }
+    }
+    else{
+      return {
+        title: 'Not Found'
+      }
     }
 }
 
@@ -28,9 +35,17 @@ const page = async ({params}: Props) => {
    
   return (
     <Flex direction="column">
-       <Text >{result[0].name}</Text>
-       <Text >{result[0].username}</Text>
-       <Text >{result[0].email}</Text>
+       {
+        Number(params.id) < 10 ? (
+          <>
+            <Text >{result[0]?.name}</Text>
+            <Text >{result[0]?.username}</Text>
+            <Text >{result[0]?.email}</Text>
+          </>
+        ) : (
+          <Text>Out of range</Text>
+        )
+       }
     </Flex>
   )
 }

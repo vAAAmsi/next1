@@ -1,16 +1,16 @@
 import React from 'react'
 import { usertype } from '../types'
 import Link from 'next/link'
-import { Flex, Text } from '@chakra-ui/react'
+import { Flex, Image, Text } from '@chakra-ui/react'
+
 type prop = {
     item : usertype
 }
-
 const DataList:React.FC<prop> = ({item}) => {
   return (
-   <Flex w="30%" direction="column">
+    <Flex flexDir="column" >
     <Link href={`/user/${item.id}`}>
-      <Text textDecor="underline">{item.name}</Text>
+      <Text >{item.name}</Text>
     </Link>
    </Flex>
   )
